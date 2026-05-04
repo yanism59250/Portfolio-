@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VRTX — Streetwear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #080808;
+      --white: #f0efeb;
+      --red: #ff3c00;
+      --grey: #141414;
+    }
+    body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(8,8,8,0.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.04em; color: var(--white); }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: #888; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { background: var(--red); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; padding: 0.5rem 1.2rem; border-radius: 4px; text-decoration: none; }
+
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 2.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(255,60,0,0.08) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-drop {
+      display: inline-block; background: var(--red); color: var(--white);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 0.3rem 0.8rem; margin-bottom: 2rem;
+      animation: fadeUp 0.5s ease both;
+    }
+    h1 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(4rem, 12vw, 9rem); line-height: 0.9;
+      letter-spacing: -0.04em; margin-bottom: 1.5rem;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+    h1 span { color: var(--red); }
+    .hero-sub {
+      color: #666; font-size: 1rem; max-width: 400px;
+      margin-bottom: 2.5rem; font-weight: 300;
+      animation: fadeUp 0.5s 0.2s ease both;
+    }
+    .hero-btns { display: flex; gap: 1rem; animation: fadeUp 0.5s 0.3s ease both; }
+    .btn-red { background: var(--red); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none; font-size: 0.9rem; transition: opacity 0.2s; }
+    .btn-red:hover { opacity: 0.85; }
+    .btn-outline { border: 1px solid #333; color: var(--white); font-family: 'Syne', sans-serif; font-weight: 600; padding: 0.9rem 2rem; border-radius: 4px; text-decoration: none; font-size: 0.9rem; transition: border-color 0.2s; }
+    .btn-outline:hover { border-color: #666; }
+
+    .marquee-wrap { overflow: hidden; background: var(--red); padding: 0.8rem 0; margin: 2rem 0; }
+    .marquee { display: flex; gap: 3rem; animation: marquee 12s linear infinite; white-space: nowrap; }
+    .marquee span { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .products { padding: 5rem 2.5rem; }
+    .products h2 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.5rem; letter-spacing: -0.03em; margin-bottom: 3rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .product-card { background: var(--grey); border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.3s; }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-img { height: 300px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .p1 { background: linear-gradient(135deg, #1a0a00, #0a0000); }
+    .p2 { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); }
+    .p3 { background: linear-gradient(135deg, #00001a, #0a0a1a); }
+    .product-label { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 3rem; letter-spacing: -0.04em; opacity: 0.15; }
+    .product-badge { position: absolute; top: 1rem; left: 1rem; background: var(--red); color: #fff; font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .product-info { padding: 1.2rem; }
+    .product-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+    .product-price { color: var(--red); font-weight: 700; font-size: 1rem; }
+
+    footer { padding: 2rem 2.5rem; border-top: 1px solid #1a1a1a; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #444; }
+    footer span { color: var(--red); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo">VRT<span>X</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Nouveautés</a></li>
+      <li><a href="#">Collections</a></li>
+      <li><a href="#">À propos</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Shop now</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-drop">⚡ New Drop — SS26</div>
+      <h1>VRT<span>X</span><br>WEAR</h1>
+      <p class="hero-sub">Streetwear authentique pour ceux qui refusent de se fondre dans la masse.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-red">Voir la collection</a>
+        <a href="#" class="btn-outline">Notre histoire</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <span>New Drop SS26</span><span>•</span><span>Streetwear Authentique</span><span>•</span>
+      <span>Limited Edition</span><span>•</span><span>Free Shipping</span><span>•</span>
+      <span>New Drop SS26</span><span>•</span><span>Streetwear Authentique</span><span>•</span>
+      <span>Limited Edition</span><span>•</span><span>Free Shipping</span><span>•</span>
+    </div>
+  </div>
+
+  <section class="products">
+    <h2>Nouveautés</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-img p1">
+          <div class="product-label">VRTX</div>
+          <div class="product-badge">New</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Hoodie VRTX Core</div>
+          <div class="product-price">89€</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img p2">
+          <div class="product-label">TEE</div>
+          <div class="product-badge">Bestseller</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Tee-shirt Logo Drop</div>
+          <div class="product-price">45€</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img p3">
+          <div class="product-label">CRGO</div>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Cargo VRTX Tech</div>
+          <div class="product-price">120€</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 <span>VRTX</span> — Tous droits réservés</div>
+    <div>Site réalisé par <span>Yanis.dev</span></div>
+  </footer>
+</body>
+</html>

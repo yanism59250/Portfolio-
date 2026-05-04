@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Le Bosphore — Restaurant Turc · Lille</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark: #0d0a06;
+      --gold: #c9a96e;
+      --cream: #f5e6c8;
+      --text: #8a7a60;
+    }
+    body { background: var(--dark); color: var(--cream); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 3rem;
+      background: rgba(13,10,6,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,169,110,0.15);
+    }
+    .nav-logo { text-align: center; }
+    .nav-pre { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--cream); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.05em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { border: 1px solid var(--gold); color: var(--gold); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5rem 1.2rem; text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); }
+
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: 8rem 2rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201,169,110,0.06) 0%, transparent 70%);
+    }
+    .hero-ornament { color: var(--gold); font-size: 1.5rem; margin-bottom: 1.5rem; opacity: 0.5; animation: fadeUp 0.6s ease both; }
+    .hero-pre { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; animation: fadeUp 0.6s 0.1s ease both; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 9vw, 7rem); font-weight: 400; line-height: 1; letter-spacing: -0.01em; color: var(--cream); margin-bottom: 0.5rem; animation: fadeUp 0.6s 0.2s ease both; }
+    h1 em { font-style: italic; color: var(--gold); }
+    .hero-line { width: 60px; height: 1px; background: var(--gold); margin: 1.5rem auto; animation: fadeUp 0.6s 0.3s ease both; }
+    .hero-sub { font-size: 0.85rem; color: var(--text); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.4s ease both; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.6s 0.5s ease both; }
+    .btn-gold { background: var(--gold); color: var(--dark); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.85rem 2.5rem; text-decoration: none; transition: opacity 0.2s; font-weight: 500; }
+    .btn-gold:hover { opacity: 0.85; }
+    .btn-ghost { border: 1px solid rgba(201,169,110,0.3); color: var(--cream); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.85rem 2.5rem; text-decoration: none; transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: var(--gold); }
+
+    .info-bar { display: flex; justify-content: center; gap: 4rem; padding: 2rem; border-top: 1px solid rgba(201,169,110,0.1); border-bottom: 1px solid rgba(201,169,110,0.1); margin: 0 3rem; flex-wrap: wrap; }
+    .info-item { text-align: center; }
+    .info-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .info-val { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); }
+
+    .menu { padding: 6rem 3rem; max-width: 900px; margin: 0 auto; }
+    .menu-pre { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; text-align: center; }
+    .menu h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 400; text-align: center; margin-bottom: 0.5rem; }
+    .menu-line { width: 40px; height: 1px; background: var(--gold); margin: 1.2rem auto 3rem; }
+    .menu-category { margin-bottom: 3rem; }
+    .menu-cat-title { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(201,169,110,0.15); }
+    .menu-item { display: flex; justify-content: space-between; align-items: baseline; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .menu-item-left { flex: 1; }
+    .menu-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); margin-bottom: 0.2rem; }
+    .menu-item-desc { font-size: 0.78rem; color: var(--text); }
+    .menu-item-price { color: var(--gold); font-size: 0.9rem; font-weight: 500; margin-left: 2rem; white-space: nowrap; }
+
+    .reservation { background: rgba(201,169,110,0.05); border-top: 1px solid rgba(201,169,110,0.1); border-bottom: 1px solid rgba(201,169,110,0.1); padding: 5rem 3rem; text-align: center; }
+    .reservation h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 0.8rem; }
+    .reservation p { color: var(--text); font-size: 0.88rem; margin-bottom: 2rem; }
+    .tel-link { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); text-decoration: none; display: block; margin-bottom: 1.5rem; }
+
+    footer { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #444; flex-wrap: wrap; gap: 0.5rem; }
+    footer span { color: var(--gold); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Notre histoire</a></li>
+    </ul>
+    <div class="nav-logo">
+      <div class="nav-pre">Restaurant</div>
+      <div class="nav-name">Le Bosphore</div>
+    </div>
+    <a href="#reservation" class="nav-cta">Réserver</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-ornament">✦</div>
+    <div class="hero-pre">Cuisine Turque Authentique · Lille</div>
+    <h1>Le<br><em>Bosphore</em></h1>
+    <div class="hero-line"></div>
+    <p class="hero-sub">Saveurs d'Istanbul au cœur de Lille depuis 2018</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-gold">Voir le menu</a>
+      <a href="#reservation" class="btn-ghost">Réserver une table</a>
+    </div>
+  </section>
+
+  <div class="info-bar">
+    <div class="info-item">
+      <div class="info-label">Ouvert</div>
+      <div class="info-val">Mar — Dim</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Horaires</div>
+      <div class="info-val">12h — 14h30 · 19h — 22h30</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Adresse</div>
+      <div class="info-val">Vieux-Lille, 59000</div>
+    </div>
+  </div>
+
+  <section class="menu" id="menu">
+    <div class="menu-pre">Nos spécialités</div>
+    <h2>Le Menu</h2>
+    <div class="menu-line"></div>
+    <div class="menu-category">
+      <div class="menu-cat-title">Entrées</div>
+      <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Mezze Maison</div><div class="menu-item-desc">Houmous, babaganoush, taboulé, pain pita chaud</div></div><div class="menu-item-price">14€</div></div>
+      <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sigara Böreği</div><div class="menu-item-desc">Rouleaux de filo croustillants au fromage et herbes fraîches</div></div><div class="menu-item-price">11€</div></div>
+      <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Soupe de Lentilles</div><div class="menu-item-desc">Recette traditionnelle, citron confit, menthe</div></div><div class="menu-item-price">8€</div></div>
+    </div>
+    <div class="menu-category">
+      <div class="menu-cat-title">Plats</div>
+      <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Adana Kebab</div><div class="menu-item-desc">Viande hachée épicée grillée, riz pilaf, sauce yaourt</div></div><div class="menu-item-price">22€</div></div>
+      <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Kuzu Tandır</div><div class="menu-item-desc">Agneau confit 8h au four, légumes du moment</div></div><div class="menu-item-price">28€</div></div>
+      <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Lahmacun</div><div class="menu-item-desc">Pizza turque à la viande, salade fraîche, jus de citron</div></div><div class="menu-item-price">16€</div></div>
+    </div>
+    <div class="menu-category">
+      <div class="menu-cat-title">Desserts</div>
+      <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Baklava Maison</div><div class="menu-item-desc">Feuilleté aux pistaches et sirop de fleur d'oranger</div></div><div class="menu-item-price">8€</div></div>
+      <div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Künefe</div><div class="menu-item-desc">Kadaïf croustillant, fromage fondu, sirop de rose</div></div><div class="menu-item-price">9€</div></div>
+    </div>
+  </section>
+
+  <section class="reservation" id="reservation">
+    <div class="menu-pre">Contactez-nous</div>
+    <h2>Réserver une table</h2>
+    <p>Pour les groupes de plus de 6 personnes, merci de nous appeler directement.</p>
+    <a href="tel:+33320000000" class="tel-link">03 20 00 00 00</a>
+    <a href="#" class="btn-gold">Réserver en ligne</a>
+  </section>
+
+  <footer>
+    <div>© 2026 <span>Le Bosphore</span> — Tous droits réservés</div>
+    <div>Site réalisé par <span>Yanis.dev</span></div>
+  </footer>
+</body>
+</html>

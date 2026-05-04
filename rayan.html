@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rayan Coach — Personal Training · Lille</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #060b10;
+      --accent: #c8f135;
+      --white: #f0f4f0;
+      --grey: #0e1a14;
+      --muted: #4a5a4a;
+    }
+    body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(6,11,16,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,241,53,0.08);
+    }
+    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: #556655; text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { background: var(--accent); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; padding: 0.5rem 1.2rem; border-radius: 100px; text-decoration: none; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 8rem 2.5rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(200,241,53,0.07) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 650px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid rgba(200,241,53,0.25); color: var(--accent);
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 100px;
+      margin-bottom: 2rem; animation: fadeUp 0.5s ease both;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    h1 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(3rem, 9vw, 7rem); line-height: 0.92;
+      letter-spacing: -0.04em; margin-bottom: 1.5rem;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+    h1 em { font-style: normal; color: var(--accent); display: block; }
+    .hero-sub { color: var(--muted); font-size: 1rem; max-width: 420px; margin-bottom: 2.5rem; font-weight: 300; animation: fadeUp 0.5s 0.2s ease both; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.5s 0.3s ease both; }
+    .btn-accent { background: var(--accent); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; padding: 0.9rem 2rem; border-radius: 100px; text-decoration: none; font-size: 0.9rem; transition: transform 0.2s; }
+    .btn-accent:hover { transform: translateY(-2px); }
+    .btn-ghost { border: 1px solid rgba(255,255,255,0.12); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 600; padding: 0.9rem 2rem; border-radius: 100px; text-decoration: none; font-size: 0.9rem; transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.3); }
+
+    .stats { display: flex; gap: 0; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.06); animation: fadeUp 0.5s 0.4s ease both; flex-wrap: wrap; }
+    .stat { padding-right: 3rem; }
+    .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2rem; color: var(--accent); }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .services { padding: 5rem 2.5rem; }
+    .section-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .services h2 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.5rem; letter-spacing: -0.03em; margin-bottom: 3rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+    .service-card { background: var(--grey); border: 1px solid rgba(200,241,53,0.06); border-radius: 12px; padding: 2rem; transition: border-color 0.2s, transform 0.2s; }
+    .service-card:hover { border-color: rgba(200,241,53,0.2); transform: translateY(-3px); }
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .service-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .service-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .service-price { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+
+    .cta-section { background: var(--grey); margin: 0 2.5rem; border-radius: 16px; padding: 4rem 3rem; text-align: center; border: 1px solid rgba(200,241,53,0.08); }
+    .cta-section h2 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.2rem; letter-spacing: -0.03em; margin-bottom: 0.8rem; }
+    .cta-section p { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; }
+    .cta-wa { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--accent); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; padding: 1rem 2.5rem; border-radius: 100px; text-decoration: none; font-size: 1rem; transition: transform 0.2s; }
+    .cta-wa:hover { transform: translateY(-2px); }
+
+    footer { padding: 2rem 2.5rem; margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: #334433; flex-wrap: wrap; gap: 0.5rem; }
+    footer span { color: var(--accent); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo">Rayan<span>.</span>Coach</div>
+    <ul class="nav-links">
+      <li><a href="#">Programmes</a></li>
+      <li><a href="#">Résultats</a></li>
+      <li><a href="#">À propos</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Séance gratuite</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Coach certifié · Lille & Tourcoing</div>
+      <h1>TRANSFORME<br><em>TON CORPS.</em></h1>
+      <p class="hero-sub">Coaching sportif personnalisé pour atteindre tes objectifs rapidement, sans perdre de temps.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-accent">Séance d'essai gratuite</a>
+        <a href="#services" class="btn-ghost">Mes programmes</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Clients accompagnés</div></div>
+        <div class="stat"><div class="stat-num">5★</div><div class="stat-label">Note moyenne</div></div>
+        <div class="stat"><div class="stat-num">3 ans</div><div class="stat-label">D'expérience</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="section-label">Programmes</div>
+    <h2>Ce que je propose</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">💪</div>
+        <div class="service-name">Coaching Individuel</div>
+        <div class="service-desc">Séances en face-à-face avec programme 100% personnalisé selon tes objectifs et ton niveau.</div>
+        <div class="service-price">À partir de 60€/séance</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📱</div>
+        <div class="service-name">Suivi en ligne</div>
+        <div class="service-desc">Programme sur mesure + suivi WhatsApp quotidien + ajustements chaque semaine.</div>
+        <div class="service-price">À partir de 150€/mois</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🥗</div>
+        <div class="service-name">Nutrition + Sport</div>
+        <div class="service-desc">Plan alimentaire adapté + programme d'entraînement pour des résultats 2x plus rapides.</div>
+        <div class="service-price">À partir de 200€/mois</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <div class="service-name">Bilan Gratuit</div>
+        <div class="service-desc">30 minutes pour analyser ta situation, tes objectifs et définir le programme idéal pour toi.</div>
+        <div class="service-price">Gratuit</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="contact">
+    <div class="section-label">Contact</div>
+    <h2>Prêt à commencer ?</h2>
+    <p>Envoie-moi un message, je réponds sous 24h et on planifie ta séance d'essai gratuite.</p>
+    <a href="https://wa.me/33600000000" class="cta-wa">💬 Me contacter sur WhatsApp</a>
+  </section>
+
+  <footer>
+    <div>© 2026 <span>Rayan Coach</span> — Tous droits réservés</div>
+    <div>Site réalisé par <span>Yanis.dev</span></div>
+  </footer>
+</body>
+</html>
